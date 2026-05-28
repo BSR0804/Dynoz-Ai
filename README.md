@@ -1,6 +1,6 @@
 # Dynoz AI — Landing Site
 
-Marketing site for **Dynoz AI**, an AI operations layer for the hospitality and travel industry. Built as a submission for the Web Developer Intern application by **Bhaskar Sharma**.
+Marketing site for **Dynoz AI**, an AI operations layer for the hospitality and travel industry. Built as a submission for the Web Developer Intern application by **Bhaskar Shamo Ray**.
 
 The site covers the home experience, product journey, how-it-works walkthrough, segment showcase, about, careers (with role detail pages and an application modal), contact (with embedded map), and full legal coverage (privacy, terms, disclaimer).
 
