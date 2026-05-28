@@ -78,7 +78,9 @@ dynoz-landing/
 │   ├── motion.ts            # Framer Motion variants
 │   └── jobs-data.ts         # Static jobs catalog
 │
-└── public/                  # Static assets (logo, etc.)
+└── public/                  # Static assets
+    ├── full_logo1.webp      # Full Dynoz wordmark (gradient D + text)
+    └── dynoz-d.png          # Cropped gradient D — used as favicon and nav icon
 ```
 
 ---
@@ -123,6 +125,17 @@ box-shadow:
 ```
 
 This treatment is applied across the journey cards, built-for panel, phone mockup, contact form, careers cards, and the legal page blocks.
+
+---
+
+## Branding
+
+The Dynoz **D** is the only piece of brand iconography on the site. It carries the original gradient (orange → pink → purple → blue) and appears in two places:
+
+- **Favicon** — `public/dynoz-d.png` (512×512), wired through Next.js metadata in `app/layout.tsx`
+- **Top navigation** — paired with white "Dynoz AI" wordmark
+
+The cropped D was generated from `full_logo1.webp` by extracting the leftmost 69×69 region of the original wordmark and upscaling to 512×512 (via `sharp`), so the favicon stays sharp at every browser size from 16px tab icons up to home-screen pin sizes. The Next.js dev build indicator is disabled in `next.config.ts` (`devIndicators: false`) so the D is the only mark anywhere near the browser chrome.
 
 ---
 
