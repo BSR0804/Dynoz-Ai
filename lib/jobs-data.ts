@@ -1,0 +1,128 @@
+export const jobs = [
+  {
+    slug: "backend-engineer",
+    dept: "Software",
+    title: "Backend Integration Engineer",
+    location: "New Delhi (Onsite)",
+    type: "Full-time",
+    exp: "2–4 Years",
+    accent: "#FF7A3D",
+    summary:
+      "Extend our backend integration layer by integrating Dynoz with hospitality systems. You will write integration code, onboard vendors end-to-end, and build the test infrastructure that keeps every integration reliable as we scale. As Dynoz expands across new vendors and markets, so does this role.",
+    responsibilities: [
+      "Integrate third-party vendor APIs and workflows into the Dynoz backend integration layer.",
+      "Own integrations end-to-end, from understanding vendor documentation and workflows through to production deployment.",
+      "Write tests covering units and edge cases as part of standard development practice.",
+    ],
+    requirements: [
+      "2–4 years of backend engineering experience with hands-on third-party API and vendor integration work.",
+      "Experience taking integrations from sandbox through to production.",
+      "Solid understanding of API authentication.",
+      "Strong judgment on security, reliability, and scalability.",
+      "Comfortable working on backend services in the cloud.",
+      "Startup mindset; comfortable building in fast-moving environments where you solve problems and move quickly.",
+    ],
+    benefits: [
+      "High ownership and direct collaboration on the vision.",
+      "Competitive compensation.",
+      "Opportunity to lead the integration function as Dynoz scales.",
+    ],
+    stack: ["Python", "FastAPI", "Postman", "PyTest"],
+  },
+  {
+    slug: "aiml-engineer",
+    dept: "AI",
+    title: "AI/ML Engineer",
+    location: "New Delhi (Onsite)",
+    type: "Full-time",
+    exp: "2–4 Years",
+    accent: "#B547D6",
+    summary:
+      "Extend the Dynoz AI platform on the LLM side, from data sourcing and processing to fine-tuning models. You will apply both engineering rigour and original thinking to make our AI more natural and consistent in production.",
+    responsibilities: [
+      "Support sourcing, processing, and preparing high-quality training datasets for LLM fine-tuning.",
+      "Fine-tune open-source language models using modern techniques, adapting based on what the problem demands.",
+      "Evaluate model behaviour, output quality, and conversational performance across real hospitality interaction scenarios.",
+      "Work across the AI pipeline, voice agents, chat agents, and the underlying LLM layer, to improve end-to-end intelligence.",
+      "Bring original thinking to fine-tuning strategy: experiment, form hypotheses, and iterate on what makes models perform best.",
+    ],
+    requirements: [
+      "2–4 years of hands-on experience in AI and ML engineering with a strong focus on LLMs.",
+      "Prior experience in fine-tuning LLMs using PEFT methods.",
+      "Solid understanding of training data pipelines: sourcing, cleaning, formatting, and quality evaluation for fine-tuning.",
+      "Familiarity with AI agent frameworks such as Pipecat.",
+      "Startup mindset, comfortable working at the frontier, solving problems, and moving quickly.",
+    ],
+    benefits: [
+      "High ownership and direct collaboration on the vision.",
+      "Competitive compensation.",
+      "Opportunity to lead the AI function as Dynoz scales.",
+    ],
+    stack: ["Python", "Pipecat", "PyTorch", "Hugging Face Transformers", "Unsloth", "PEFT"],
+  },
+  {
+    slug: "sales-associate",
+    dept: "Sales & Partnerships",
+    title: "Sales Associate – Hospitality & Travel",
+    location: "New Delhi (Onsite)",
+    type: "Full-time",
+    exp: "3+ Years",
+    accent: "#5B7CFF",
+    summary:
+      "Drive new business for Dynoz. You will do outbound outreach across hotels, travel platforms, and hospitality groups — running cold outreach, qualifying prospects, retargeting, and pushing deals to close.",
+    responsibilities: [
+      "Identify and map targets across hospitality and travel including key decision-maker contacts and organisational entry points.",
+      "Execute structured outreach to initiate first conversations with partnership prospects across all target segments.",
+      "Coordinate discovery calls, product demonstrations, and follow-on meetings between qualified prospects and the founding team.",
+      "Own the relationship continuity after initial conversations, maintaining consistent, professional engagement with prospects until partnerships formally progress.",
+    ],
+    requirements: [
+      "3+ years of experience in business development in hospitality/travel.",
+      "Existing relationships or network within the industry strongly preferred.",
+      "Strong written and verbal communication skills.",
+      "Interest in the intersection of AI and hospitality, and in building something from the ground up.",
+      "Startup mindset, eager to build from scratch, move fast, and grow with the company through its early stage.",
+    ],
+    benefits: [
+      "High ownership and direct collaboration on the vision.",
+      "Competitive fixed compensation with performance-linked incentives tied to partnership outcomes.",
+      "Opportunity to build and lead the partnerships function as Dynoz scales.",
+    ],
+    stack: [],
+  },
+  {
+    slug: "qa-engineer",
+    dept: "Software",
+    title: "QA Engineer",
+    location: "New Delhi (Onsite)",
+    type: "Full-time",
+    exp: "3–5 Years",
+    accent: "#E94B8A",
+    summary:
+      "Ensure Dynoz's AI agents and backend systems work flawlessly at scale. You'll design test plans, write automated tests, catch regressions before they reach production, and build the quality infrastructure that lets the team ship with confidence.",
+    responsibilities: [
+      "Test end-to-end conversation flow scenarios across the Dynoz voice and chat agent.",
+      "Validate backend integrations, ensuring data flows correctly between Dynoz and third-party systems.",
+      "Identify, document, and track bugs with clear reproduction steps so issues are resolved quickly.",
+      "Run regression testing across core flows whenever new features or integrations are shipped.",
+      "Test edge cases: unexpected inputs, vendor failures, multilingual scenarios, and off-script guest interactions.",
+      "Support UAT before new client deployments, running real end-to-end scenarios from the guest's perspective.",
+    ],
+    requirements: [
+      "3–5 years of QA experience covering manual testing, API testing, and integration testing.",
+      "Comfortable using tools like Postman for API and integration validation.",
+      "Strong eye for edge cases; you actively look for ways to break things, not just confirm they work.",
+      "Clear, structured bug reporting that developers can act on immediately.",
+      "Understanding of performance testing concepts: load, latency, and concurrency, and willingness to grow into this as the platform scales.",
+      "Startup mindset, eager to build from scratch, move fast, and grow with the company through its early stage.",
+    ],
+    benefits: [
+      "High ownership and direct collaboration on the vision.",
+      "Competitive compensation.",
+      "Opportunity to lead the QA function as Dynoz scales.",
+    ],
+    stack: ["Postman", "Pytest", "Jira", "Manual Testing", "API Testing", "Performance Testing"],
+  },
+];
+
+export type Job = (typeof jobs)[0];
