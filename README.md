@@ -4,6 +4,8 @@ Marketing site for **Dynoz AI**, an AI operations layer for the hospitality and 
 
 The site covers the home experience, product journey, how-it-works walkthrough, segment showcase, about, careers (with role detail pages and an application modal), contact (with embedded map), and full legal coverage (privacy, terms, disclaimer).
 
+**Fully responsive** — the entire site is built mobile-first and adapts cleanly across **mobile phones, tablets, and laptops/desktops**. Every layout, card, nav, form, and modal has been verified at the common breakpoints (`sm`, `md`, `lg`, `xl`).
+
 ---
 
 ## Tech stack
@@ -125,6 +127,20 @@ box-shadow:
 ```
 
 This treatment is applied across the journey cards, built-for panel, phone mockup, contact form, careers cards, and the legal page blocks.
+
+---
+
+## Responsive design
+
+The site is built **mobile-first** and rendered cleanly on **mobile phones, tablets, and laptops/desktops**.
+
+| Breakpoint | Width | Behaviour |
+| --- | --- | --- |
+| Mobile | `< 768px` | Single-column layouts, hamburger nav, stacked cards, touch-sized tap targets, full-width form inputs |
+| Tablet | `768px – 1024px` | Two-column grids in most sections, full nav visible, phone mockup repositions next to copy |
+| Laptop / Desktop | `> 1024px` | Three-column grids, sticky integrations panel in *How It Works*, full hero with side-by-side hero copy + CTA |
+
+Tailwind CSS v4's responsive utilities (`sm:`, `md:`, `lg:`) drive the breakpoint switches, and every interactive surface — cards, forms, modal, nav, careers tabs, the contact map — has been tuned at all three sizes.
 
 ---
 
