@@ -85,6 +85,21 @@ dynoz-landing/
 
 ## Design system
 
+### Why this theme?
+
+The visual direction was a deliberate choice driven by what Dynoz AI actually *is* and who it sells to.
+
+- **Hospitality and travel platforms expect calm, premium interfaces.** Operators in this industry compare us against vendors like Mews, Cloudbeds, Salesforce, and Opera — clean, restrained UIs. A rainbow-gradient SaaS look would feel like a consumer toy, not enterprise infrastructure that hotel chains and airlines trust with guest data.
+- **A single accent color (`#1A56FF`) over multi-color gradients** keeps focus on the message and the product. Color is reserved for action (CTAs, active states, form focus, key data points) so the eye knows exactly where to go. The earlier rainbow palette was visually loud and competed with the content for attention.
+- **High contrast `#0C0C0E` ↔ `#FAFAF8`** gives the site a confident editorial rhythm — dark sections feel like "what we believe," light sections feel like "what we do," and that alternation pulls users through the page without long scrolling fatigue.
+- **The 3D black bulge-out card** is the signature visual hook. It gives the site a tactile, physical quality — like the content is sitting *on* the page rather than baked into it. It's distinctive enough to feel branded without resorting to gradients or illustrations, and it scales cleanly from a small feature card to a full CTA panel.
+- **No AI-generated illustrations.** The hospitality buyer is sensitive to anything that feels "off" — uncanny rendered hands or stock 3D objects break credibility instantly. Type, layout, and a real product mockup carry the whole site.
+- **Multilingual + always-on is the product promise**, so the UI itself had to feel calm and instantly readable at any scroll position. Dark text on light, light text on dark, and accent-only emphasis ensures every block is legible on a 13" laptop or a projector in a client meeting.
+
+The result is a site that reads as a serious B2B platform first, and an AI product second — which is exactly the order a hotel COO or airline ops lead wants to see.
+
+---
+
 A single, consistent visual language is used across every page.
 
 | Token | Value | Use |
