@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   title: "Dynoz AI — Where Service Meets Intelligence",
   description:
     "The AI operations layer for hospitality and travel. Multilingual AI voice agents that handle every guest call, across the full guest journey, 24/7.",
+  icons: {
+    icon: [
+      { url: "/full_logo1.webp", type: "image/webp" },
+    ],
+    shortcut: "/full_logo1.webp",
+    apple: "/full_logo1.webp",
+  },
   openGraph: {
     title: "Dynoz AI — Where Service Meets Intelligence",
     description:
