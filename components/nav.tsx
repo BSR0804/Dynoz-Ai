@@ -90,9 +90,7 @@ export default function Nav() {
 
           {/* Logo — show only the D icon (approx left 20% of image) with color, then white text */}
           <a href="/" className="flex items-center gap-2">
-            <div className="h-10 overflow-hidden" style={{ width: "38px" }}>
-              <img src="/full_logo1.webp" alt="Dynoz AI" className="h-10 w-auto" style={{ maxWidth: "none" }} />
-            </div>
+            <img src="/dynoz-d.png" alt="Dynoz AI" className="h-9 w-9" />
             <span className="text-white font-semibold text-[19px] tracking-tight">Dynoz AI</span>
           </a>
 
