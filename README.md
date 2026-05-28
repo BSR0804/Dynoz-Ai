@@ -143,6 +143,6 @@ This treatment is applied across the journey cards, built-for panel, phone mocku
 
 ## Author
 
-**Bhaskar Sharma**
+**Bhaskar Shamo Ray**
 Web Developer Intern submission for Dynoz AI
 Email: bhaskarshamoray11@gmail.com
