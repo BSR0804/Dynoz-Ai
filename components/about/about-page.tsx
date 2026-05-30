@@ -23,11 +23,12 @@ const journey = [
   { phase: "After Checkout", headline: "Feedback & recovery",         body: "Dynoz handles feedback collection, service recovery workflows, and loyalty building — turning every stay into a relationship." },
 ];
 
+const EASE = [0.16, 1, 0.3, 1] as const;
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 22 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.65, delay, ease: EASE },
 });
 
 export default function AboutPage() {
