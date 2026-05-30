@@ -21,10 +21,10 @@ import { CalendarCheck, Bell, MessageSquareHeart } from "lucide-react";
 type Msg = { from: "guest" | "dynoz"; text: string; lang?: string };
 
 const SCRIPT: Msg[] = [
-  { from: "guest", text: "Hola, ¿tienen una habitación?", lang: "ES" },
-  { from: "dynoz", text: "¡Sí! Una King para dos noches, ¿le reservo?", lang: "ES" },
-  { from: "guest", text: "Perfecto, resérvala.", lang: "ES" },
-  { from: "dynoz", text: "Reservado — Habitación 204. Confirmación enviada.", lang: "ES" },
+  { from: "guest", text: "Hi, do you have a room available?", lang: "EN" },
+  { from: "dynoz", text: "Yes! A King for two nights — shall I book it?", lang: "EN" },
+  { from: "guest", text: "Perfect, please book it.", lang: "EN" },
+  { from: "dynoz", text: "Booked — Room 204. Confirmation sent.", lang: "EN" },
 ];
 
 const PHASE_1 = {

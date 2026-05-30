@@ -1,6 +1,6 @@
 # Dynoz AI — Landing Site
 
-**Live:** [https://dynoz-ai.vercel.app]()
+**Live:** [https://dynoz-ai-zeta.vercel.app](https://dynoz-ai-zeta.vercel.app)
 
 Dynoz AI is an AI operations platform for the hospitality and travel industry, deploying multilingual voice agents that handle guest calls, route requests, and resolve service needs around the clock. This repository contains the public-facing marketing site — a full-stack Next.js application covering the product, company, careers, and legal surfaces.
 
@@ -59,9 +59,11 @@ dynoz-landing/
 │   ├── nav.tsx                   # Scroll-aware navigation
 │   ├── footer.tsx
 │   ├── hero/                     # Hero section, waveform, transcript, particle field
-│   ├── journey.tsx               # Guest journey phase cards
+│   ├── language-ribbon.tsx       # Two-row dual-direction language marquee
+│   ├── journey-showcase.tsx      # Scroll-pinned phone with phase cards emerging from behind
+│   ├── journey.tsx               # Original static guest journey cards (legacy)
 │   ├── how-it-works.tsx          # Step timeline with sticky integrations panel
-│   ├── built-for.tsx             # Segment switcher with animated phone mockup
+│   ├── built-for.tsx             # Segment switcher with live looping phone chat
 │   ├── metrics.tsx               # Count-up statistics strip
 │   ├── trust-strip.tsx           # Infinite logo marquee
 │   ├── cta-band.tsx              # Bottom call-to-action
@@ -95,7 +97,7 @@ dynoz-landing/
 
 | Route | Content |
 |-------|---------|
-| `/` | Hero, guest journey, how it works, built-for segment switcher, metrics, trust strip, CTA |
+| `/` | Language ribbon, hero, scroll-pinned guest-journey showcase, how it works, built-for segment switcher, metrics, trust strip, CTA |
 | `/about` | Mission, vision, operational model, principles, target segments |
 | `/careers` | Culture values, open role listings |
 | `/careers/[slug]` | Role detail, responsibilities, requirements, benefits, apply modal |
@@ -118,16 +120,18 @@ The signature card treatment — a solid 2px black border with layered hard-offs
 
 ### Motion System
 
-The site implements a layered motion architecture with 44 distinct animation effects across seven categories:
+The site implements a layered motion architecture across seven categories.
 
 **Ambient and continuous**
 - Six radial gradient orbs float across the page using three independent CSS keyframe patterns, each with different timing (18s–28s) and scale oscillation ranges.
 - A canvas-based particle field runs in the hero section, with brand-colored dots drifting and pulsing independently via `requestAnimationFrame`.
 - An ambient grid pattern drifts behind the hero over a 28-second cycle.
 - The brand gradient sweeps continuously across all accent text at 6-second intervals.
+- A two-row language ribbon sits below the navigation: the top row scrolls right-to-left and the bottom row left-to-right, each carrying a distinct set of 14 languages so none repeat within or across rows. Each row duplicates its set and translates `-50%` for a seamless infinite loop, with edge-fade masks hiding the seam.
 
 **Scroll-linked**
 - The hero image scales and translates on a `useScroll` / `useTransform` parallax track as the user scrolls past the fold.
+- The guest-journey section is a scroll-pinned showcase. A tall (260vh) scroll driver pins a centered phone mockup to the viewport, and a smoothed `useScroll` progress value (`useSpring`) drives the three phase cards out from **behind** the phone one at a time — each card animates within its own clamped slice of scroll progress, so they emerge sequentially on scroll-down and retract in reverse on scroll-up, replaying every pass.
 - A scroll progress bar built from a `useState` + scroll event listener fills across the top of the viewport.
 - A `requestAnimationFrame` loop reads scroll velocity and applies a real-time `skewY` CSS variable to the page content — the site subtly tilts while scrolling and springs back on release.
 - The "How It Works" step connector lines fill top-to-bottom as each step becomes active.
@@ -138,14 +142,19 @@ The site implements a layered motion architecture with 44 distinct animation eff
 - Headline text is split word-by-word, each word entering with a `y: 110%` clip and a `rotateX: 40deg` perspective transform, creating a folding-in reveal effect.
 - The session-once intro screen runs an 18-particle burst, two expanding ring pulses, a spring-based logo scale-in, and a staggered character-by-character wordmark reveal before sliding upward off the viewport.
 
+**Live device chat**
+- The "Built For" phone mockup runs a live, looping conversation for all three segment tabs: messages reveal one at a time, a three-dot typing indicator precedes each AI reply, and the sequence loops continuously. Switching tabs (Hotels & Stays / Travel Platforms / Airlines) restarts the chat with that segment's script via a React `key` remount.
+- The journey-showcase phone runs its own looping multilingual chat (Spanish front-desk booking flow) triggered by an `IntersectionObserver` when the section enters view, with the same typing-indicator cadence.
+
 **Interactive**
-- Every card on the site is wrapped in a `TiltCard` component that reads mouse position relative to the element and applies `perspective(800px) rotateX() rotateY()` transforms in real time, with a smooth return to neutral on mouse leave.
+- Every card on the site is wrapped in a `TiltCard` component that reads mouse position relative to the element and applies `perspective(800px) rotateX() rotateY()` transforms in real time, with a smooth return to neutral on mouse leave. The journey-showcase phone mockup carries the same mouse-tilt interaction, layered on top of its floating bob animation.
+- Language ribbon chips magnify (`scale(1.18)`) with a glow on hover, and hovering the ribbon pauses both scrolling rows.
 - The custom cursor runs two layers via `requestAnimationFrame`: a 6px gradient dot that tracks 1:1 with the pointer, and a larger conic-gradient ring that trails behind using lerp spring interpolation and rotates continuously at variable speed depending on hover state.
 - Primary CTA buttons animate their gradient background-position on hover, lift 1px on the Y axis, and pulse their box-shadow on a 3-second breathing cycle.
 - The "Built For" section tab indicator and the navigation active underline both use Framer Motion `layoutId` for spring-based position transitions.
 
 **Reduced motion**
-All decorative animations — keyframes, transitions, canvas loops, cursor effects, and tilt interactions — are fully disabled when `prefers-reduced-motion: reduce` is set. The site remains fully functional and readable without any motion.
+All decorative animations — keyframes, transitions, canvas loops, cursor effects, tilt interactions, the scroll-pinned showcase, and the language ribbon — are fully disabled when `prefers-reduced-motion: reduce` is set. The site remains fully functional and readable without any motion, with the journey showcase falling back to statically stacked cards.
 
 ### Component Architecture
 
@@ -165,6 +174,10 @@ All decorative animations — keyframes, transitions, canvas loops, cursor effec
 
 **`Intro`** — Session-once preloader using `sessionStorage` to prevent repeat display on navigation. Runs a multi-phase animation sequence: spark burst, ring pulses, logo spring, wordmark stagger, tagline fade, then slides the full-screen overlay upward to reveal the page.
 
+**`LanguageRibbon`** — Two-row marquee placed below the navigation. Two distinct 14-language sets scroll in opposite directions via dedicated `marquee-rtl` / `marquee-ltr` keyframes. Filled gradient chips are interleaved with frosted outline chips; each chip magnifies on hover and both rows pause when the ribbon is hovered. Edge-fade masks hide the loop seams.
+
+**`JourneyShowcase`** — The scroll-pinned guest-journey section. A tall outer container drives a `useScroll` progress value (smoothed with `useSpring`); a sticky inner stage holds a centered phone mockup with three phase cards layered behind it. Each card and its transform window is mapped to a sequential, clamped slice of progress so cards emerge from behind the phone one at a time on scroll-down and retract on scroll-up. The phone has mouse-tilt, a floating bob, and an `IntersectionObserver`-triggered looping multilingual chat. Falls back to statically stacked cards on mobile and under reduced motion.
+
 ### Responsive Design
 
 The site is built mobile-first. Layouts shift at the `md` (768px) and `lg` (1024px) Tailwind breakpoints. The hero image, particle field, and tilt effects are suppressed on smaller screens. The navigation collapses to a hamburger menu with a full-screen overlay on mobile. All form inputs, modals, and card grids adapt to single-column layouts on small viewports.
@@ -173,15 +186,21 @@ The site is built mobile-first. Layouts shift at the `md` (768px) and `lg` (1024
 
 ## Key Features
 
+- Two-row dual-direction language ribbon below the nav, showcasing 28 distinct languages with hover magnification and pause-on-hover
+- Scroll-pinned guest-journey showcase: a centered phone locks to the viewport while three phase cards emerge sequentially from behind it on scroll, retracting in reverse on scroll-up
 - Animated live demo transcript in the hero — a looping multilingual guest/agent conversation with per-character typing and a synchronized waveform visualizer
+- Live, looping phone chat in "Built For" across all three segment tabs, with typing indicators and per-tab script restarts
+- Mouse-tilt 3D interaction on every card surface and on both phone mockups
 - Scroll-driven "How It Works" step timeline with sticky integrations panel and dynamic connector line fill
-- Per-segment tab switcher in "Built For" with an animated phone mockup and staggered message bubble entrances
 - `requestAnimationFrame` count-up animation on all metric figures, triggered on scroll entry
+- Custom dual-layer cursor, scroll progress bar, scroll-velocity skew, and ambient floating-orb + particle-field backgrounds
+- Session-once animated intro splash, gated by `sessionStorage`
 - Infinite logo marquee in the trust strip, pausing on hover
 - Dynamic career role pages generated from a static jobs catalog with slug-based routing
 - Apply modal with CV upload field, project links, and a prefilled `mailto:` submission
 - Contact form with embedded Google Map
 - Full legal page coverage — Privacy Policy, Terms of Service, Disclaimer
+- Fully reduced-motion compliant; mobile-first responsive across all breakpoints
 
 ---
 
