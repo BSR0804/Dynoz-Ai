@@ -17,7 +17,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden"
+      className="relative min-h-[calc(100svh-7rem)] flex flex-col justify-center overflow-hidden"
       style={{ background: "var(--paper)" }}
     >
       {/* Floating particle field */}
@@ -53,8 +53,8 @@ export default function Hero() {
       </div>
 
       {/* Content grid */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16 items-center min-h-[calc(100svh-9rem)]">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-10 pb-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16 items-center min-h-[calc(100svh-14rem)]">
 
           {/* Left — text */}
           <motion.div

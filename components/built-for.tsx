@@ -1,8 +1,120 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Building2, Plane, Monitor } from "lucide-react";
+
+type ChatMsg = { speaker: string; text: string };
+
+function TypingBubble() {
+  return (
+    <div className="flex justify-end">
+      <div
+        className="px-3 py-2.5 rounded-xl flex items-center gap-1"
+        style={{ background: "rgba(255,255,255,0.08)" }}
+      >
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ background: "rgba(255,255,255,0.5)" }}
+            animate={{ opacity: [0.3, 1, 0.3], y: [0, -2, 0] }}
+            transition={{ duration: 1, repeat: Infinity, delay: i * 0.15 }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* LiveChat — plays the conversation message-by-message with a typing
+   indicator before each Dynoz reply, then loops. Restarts whenever the
+   `conversation` changes (i.e. when the active tab switches). */
+function LiveChat({ conversation }: { conversation: ChatMsg[] }) {
+  const [count, setCount] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+    setCount(0);
+    setTyping(false);
+
+    let i = 0;
+    const schedule = (fn: () => void, ms: number) => {
+      timers.current.push(setTimeout(fn, ms));
+    };
+
+    const step = () => {
+      if (i >= conversation.length) {
+        // hold, then loop
+        schedule(() => {
+          setCount(0);
+          i = 0;
+          schedule(step, 600);
+        }, 2800);
+        return;
+      }
+      const isDynoz = conversation[i].speaker === "Dynoz";
+      if (isDynoz) {
+        setTyping(true);
+        schedule(() => {
+          setTyping(false);
+          setCount((c) => c + 1);
+          i++;
+          schedule(step, 850);
+        }, 1000);
+      } else {
+        setCount((c) => c + 1);
+        i++;
+        schedule(step, 1000);
+      }
+    };
+
+    schedule(step, 500);
+
+    return () => {
+      timers.current.forEach(clearTimeout);
+      timers.current = [];
+    };
+  }, [conversation]);
+
+  return (
+    <div className="flex flex-col gap-2 p-3.5 pb-5 min-h-[180px]">
+      <AnimatePresence>
+        {conversation.slice(0, count).map((msg, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className={`flex ${msg.speaker === "Guest" ? "justify-start" : "justify-end"}`}
+          >
+            <div
+              className="max-w-[88%] px-3 py-2 rounded-xl text-[10px] leading-relaxed"
+              style={
+                msg.speaker === "Dynoz"
+                  ? {
+                      background:
+                        "linear-gradient(135deg, rgba(255,122,61,0.85), rgba(233,75,138,0.85), rgba(181,71,214,0.85))",
+                      color: "#fff",
+                    }
+                  : {
+                      background: "rgba(255,255,255,0.08)",
+                      color: "rgba(255,255,255,0.6)",
+                    }
+              }
+            >
+              {msg.text}
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+      {typing && <TypingBubble />}
+    </div>
+  );
+}
 
 const segments = [
   {
@@ -188,36 +300,8 @@ export default function BuiltFor() {
                   <div className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot" />
                 </div>
 
-                {/* Messages */}
-                <div className="flex flex-col gap-2 p-3.5 pb-5">
-                  {current.conversation.map((msg, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 6, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ delay: 0.4 + i * 0.35, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className={`flex ${msg.speaker === "Guest" ? "justify-start" : "justify-end"}`}
-                    >
-                      <div
-                        className="max-w-[88%] px-3 py-2 rounded-xl text-[10px] leading-relaxed"
-                        style={
-                          msg.speaker === "Dynoz"
-                            ? {
-                                background: "linear-gradient(135deg, rgba(255,122,61,0.25), rgba(233,75,138,0.25), rgba(181,71,214,0.25), rgba(91,124,255,0.25))",
-                                color: "rgba(255,255,255,0.95)",
-                                border: "1px solid rgba(255,255,255,0.08)",
-                              }
-                            : {
-                                background: "rgba(255,255,255,0.08)",
-                                color: "rgba(255,255,255,0.55)",
-                              }
-                        }
-                      >
-                        {msg.text}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                {/* Messages — live looping chat, restarts on tab switch */}
+                <LiveChat key={current.id} conversation={current.conversation} />
               </motion.div>
             </div>
           </motion.div>

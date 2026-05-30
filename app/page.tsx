@@ -1,7 +1,8 @@
 import Nav from "@/components/nav";
+import LanguageRibbon from "@/components/language-ribbon";
 import Hero from "@/components/hero/hero";
 import TrustStrip from "@/components/trust-strip";
-import Journey from "@/components/journey";
+import JourneyShowcase from "@/components/journey-showcase";
 import HowItWorks from "@/components/how-it-works";
 import BuiltFor from "@/components/built-for";
 import Metrics from "@/components/metrics";
@@ -12,9 +13,12 @@ export default function Home() {
   return (
     <main>
       <Nav />
+      <div className="pt-16">
+        <LanguageRibbon />
+      </div>
       <Hero />
       <TrustStrip />
-      <Journey />
+      <JourneyShowcase />
       <HowItWorks />
       <BuiltFor />
       <Metrics />

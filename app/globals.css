@@ -137,6 +137,33 @@ body {
 }
 .animate-marquee:hover { animation-play-state: paused; }
 
+/* Language ribbon — two directions */
+@keyframes marquee-rtl {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-ltr {
+  0%   { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.lang-track-rtl {
+  animation: marquee-rtl 42s linear infinite;
+  will-change: transform;
+}
+.lang-track-ltr {
+  animation: marquee-ltr 46s linear infinite;
+  will-change: transform;
+}
+.lang-ribbon:hover .lang-track-rtl,
+.lang-ribbon:hover .lang-track-ltr {
+  animation-play-state: paused;
+}
+.lang-chip:hover {
+  transform: scale(1.18);
+  z-index: 5;
+  box-shadow: 0 12px 30px rgba(181,71,214,0.28) !important;
+}
+
 /* Slow drifting hero gradient mesh blobs */
 @keyframes blob-a {
   0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
