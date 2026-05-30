@@ -1,31 +1,28 @@
 # Dynoz AI — Landing Site
 
-Marketing site for **Dynoz AI**, an AI operations layer for the hospitality and travel industry. Built as a submission for the Web Developer Intern application by **Bhaskar Shamo Ray**.
+**Live:** [https://dynoz-ai.vercel.app](https://dynoz-ai.vercel.app)
 
-The site covers the home experience, product journey, how-it-works walkthrough, segment showcase, about, careers (with role detail pages and an application modal), contact (with embedded map), and full legal coverage (privacy, terms, disclaimer).
-
-**Fully responsive** — the entire site is built mobile-first and adapts cleanly across **mobile phones, tablets, and laptops/desktops**. Every layout, card, nav, form, and modal has been verified at the common breakpoints (`sm`, `md`, `lg`, `xl`).
+Dynoz AI is an AI operations platform for the hospitality and travel industry, deploying multilingual voice agents that handle guest calls, route requests, and resolve service needs around the clock. This repository contains the public-facing marketing site — a full-stack Next.js application covering the product, company, careers, and legal surfaces.
 
 ---
 
-## Tech stack
+## Tech Stack
 
-- **Next.js 16** (App Router) + **React 19**
-- **TypeScript 5**
-- **Tailwind CSS v4**
-- **Framer Motion** for entrance & modal animations
-- **Lucide React** for iconography
-- **GSAP** (available for advanced scroll choreography)
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion |
+| Icons | Lucide React |
+| Runtime | React 19 |
+| Deployment | Vercel |
 
 ---
 
-## Getting started
+## Getting Started
 
-### Prerequisites
-- Node.js 18.18 or newer
-- npm
-
-### Install & run
+**Prerequisites:** Node.js 18.18 or newer, npm.
 
 ```bash
 cd dynoz-landing
@@ -33,160 +30,162 @@ npm install
 npm run dev
 ```
 
-The site is served at [http://localhost:3000](http://localhost:3000).
+The development server starts at [http://localhost:3000](http://localhost:3000).
 
-### Available scripts
-
-| Script | Purpose |
-| --- | --- |
-| `npm run dev` | Start the development server with hot reload |
-| `npm run build` | Generate a production build |
-| `npm run start` | Serve the production build |
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Development server with hot reload |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
 
 ---
 
-## Project structure
+## Site Structure
 
 ```
 dynoz-landing/
-├── app/                     # App Router pages
-│   ├── page.tsx             # Home
-│   ├── about/               # About page
-│   ├── careers/             # Careers index + dynamic [slug] role pages
-│   ├── contact/             # Contact + embedded Google Map
-│   ├── privacy-policy/      # Legal
-│   ├── terms-of-service/    # Legal
-│   ├── disclaimer/          # Legal
-│   ├── particle-demo/       # Static particle text experiment
-│   ├── layout.tsx           # Root layout
-│   └── globals.css          # Design tokens + global styles
+├── app/
+│   ├── page.tsx                  # Home
+│   ├── about/                    # Company overview
+│   ├── careers/                  # Careers index + dynamic [slug] role pages
+│   ├── contact/                  # Contact form + embedded map
+│   ├── privacy-policy/
+│   ├── terms-of-service/
+│   ├── disclaimer/
+│   ├── layout.tsx                # Root layout, global providers
+│   └── globals.css               # Design tokens, keyframes, utilities
 │
-├── components/              # Reusable UI components
-│   ├── nav.tsx              # Top navigation
-│   ├── footer.tsx           # Footer
-│   ├── hero/                # Hero section + particle scene
-│   ├── journey.tsx          # Guest journey phases
-│   ├── how-it-works.tsx     # Step timeline with sticky integrations
-│   ├── built-for.tsx        # Segment switcher with phone mockup
-│   ├── metrics.tsx          # Key metrics strip
-│   ├── trust-strip.tsx      # Logo strip
-│   ├── cta-band.tsx         # Bottom CTA
+├── components/
+│   ├── nav.tsx                   # Scroll-aware navigation
+│   ├── footer.tsx
+│   ├── hero/                     # Hero section, waveform, transcript, particle field
+│   ├── journey.tsx               # Guest journey phase cards
+│   ├── how-it-works.tsx          # Step timeline with sticky integrations panel
+│   ├── built-for.tsx             # Segment switcher with animated phone mockup
+│   ├── metrics.tsx               # Count-up statistics strip
+│   ├── trust-strip.tsx           # Infinite logo marquee
+│   ├── cta-band.tsx              # Bottom call-to-action
+│   ├── cursor.tsx                # Custom cursor system
+│   ├── intro.tsx                 # Session-once splash screen
+│   ├── scroll-progress.tsx       # Scroll progress indicator
+│   ├── floating-orbs.tsx         # Ambient gradient background
+│   ├── scroll-skew.tsx           # Scroll-velocity skew effect
+│   ├── particle-field.tsx        # Canvas particle animation
+│   ├── split-text.tsx            # Word-split reveal component
+│   ├── tilt-card.tsx             # 3D mouse-tilt card wrapper
+│   ├── legal-block.tsx           # Animated legal content blocks
 │   ├── about/about-page.tsx
 │   ├── careers/careers-page.tsx
 │   ├── careers/job-page.tsx
 │   └── contact/contact-page.tsx
 │
 ├── lib/
-│   ├── motion.ts            # Framer Motion variants
-│   └── jobs-data.ts         # Static jobs catalog
+│   ├── motion.ts                 # Shared Framer Motion variants
+│   └── jobs-data.ts              # Static job listings catalog
 │
-└── public/                  # Static assets
-    ├── full_logo1.webp      # Full Dynoz wordmark (gradient D + text)
-    └── dynoz-d.png          # Cropped gradient D — used as favicon and nav icon
+└── public/
+    ├── dynoz-d.png               # Brand icon, used as favicon
+    ├── full_logo1.webp           # Full wordmark
+    └── bg1.jpg                   # Hero visual asset
 ```
-
----
-
-## Design system
-
-### Why this theme?
-
-The visual direction was a deliberate choice driven by what Dynoz AI actually *is* and who it sells to.
-
-- **Hospitality and travel platforms expect calm, premium interfaces.** Operators in this industry compare us against vendors like Mews, Cloudbeds, Salesforce, and Opera — clean, restrained UIs. A rainbow-gradient SaaS look would feel like a consumer toy, not enterprise infrastructure that hotel chains and airlines trust with guest data.
-- **A single accent color (`#1A56FF`) over multi-color gradients** keeps focus on the message and the product. Color is reserved for action (CTAs, active states, form focus, key data points) so the eye knows exactly where to go. The earlier rainbow palette was visually loud and competed with the content for attention.
-- **High contrast `#0C0C0E` ↔ `#FAFAF8`** gives the site a confident editorial rhythm — dark sections feel like "what we believe," light sections feel like "what we do," and that alternation pulls users through the page without long scrolling fatigue.
-- **The 3D black bulge-out card** is the signature visual hook. It gives the site a tactile, physical quality — like the content is sitting *on* the page rather than baked into it. It's distinctive enough to feel branded without resorting to gradients or illustrations, and it scales cleanly from a small feature card to a full CTA panel.
-- **No AI-generated illustrations.** The hospitality buyer is sensitive to anything that feels "off" — uncanny rendered hands or stock 3D objects break credibility instantly. Type, layout, and a real product mockup carry the whole site.
-- **Multilingual + always-on is the product promise**, so the UI itself had to feel calm and instantly readable at any scroll position. Dark text on light, light text on dark, and accent-only emphasis ensures every block is legible on a 13" laptop or a projector in a client meeting.
-
-The result is a site that reads as a serious B2B platform first, and an AI product second — which is exactly the order a hotel COO or airline ops lead wants to see.
-
----
-
-A single, consistent visual language is used across every page.
-
-| Token | Value | Use |
-| --- | --- | --- |
-| Ink (primary dark) | `#0C0C0E` | Dark sections, nav, hero, CTA bands |
-| Paper (primary light) | `#FAFAF8` | Light sections |
-| Accent | `#1A56FF` | Buttons, active states, highlights |
-| Card dark | `#2A2A2E` | Inner cards on dark surfaces |
-| Card sub-dark | `#141418` | Subtle dark surface variants |
-
-### Signature card treatment
-
-The site's recurring 3D bulge-out card uses a hard black border with layered offset shadows:
-
-```css
-border: 2px solid #0C0C0E;
-box-shadow:
-  4px 4px 0px #0C0C0E,
-  8px 8px 0px rgba(12,12,14,0.35),
-  14px 14px 0px rgba(12,12,14,0.12);
-```
-
-This treatment is applied across the journey cards, built-for panel, phone mockup, contact form, careers cards, and the legal page blocks.
-
----
-
-## Responsive design
-
-The site is built **mobile-first** and rendered cleanly on **mobile phones, tablets, and laptops/desktops**.
-
-| Breakpoint | Width | Behaviour |
-| --- | --- | --- |
-| Mobile | `< 768px` | Single-column layouts, hamburger nav, stacked cards, touch-sized tap targets, full-width form inputs |
-| Tablet | `768px – 1024px` | Two-column grids in most sections, full nav visible, phone mockup repositions next to copy |
-| Laptop / Desktop | `> 1024px` | Three-column grids, sticky integrations panel in *How It Works*, full hero with side-by-side hero copy + CTA |
-
-Tailwind CSS v4's responsive utilities (`sm:`, `md:`, `lg:`) drive the breakpoint switches, and every interactive surface — cards, forms, modal, nav, careers tabs, the contact map — has been tuned at all three sizes.
-
----
-
-## Branding
-
-The Dynoz **D** is the only piece of brand iconography on the site. It carries the original gradient (orange → pink → purple → blue) and appears in two places:
-
-- **Favicon** — `public/dynoz-d.png` (512×512), wired through Next.js metadata in `app/layout.tsx`
-- **Top navigation** — paired with white "Dynoz AI" wordmark
-
-The cropped D was generated from `full_logo1.webp` by extracting the leftmost 69×69 region of the original wordmark and upscaling to 512×512 (via `sharp`), so the favicon stays sharp at every browser size from 16px tab icons up to home-screen pin sizes. The Next.js dev build indicator is disabled in `next.config.ts` (`devIndicators: false`) so the D is the only mark anywhere near the browser chrome.
-
----
-
-## Key features
-
-- **Fully responsive** across mobile, tablet, and desktop
-- **Per-segment phone mockup** with animated guest ↔ Dynoz conversations
-- **Scroll-driven step timeline** for the "How It Works" section with per-step accent colors
-- **Sticky integrations panel** in the steps section
-- **Dynamic career role pages** with an apply modal (CV upload + project links)
-- **Embedded Google Map** on the contact page
-- **Working contact form** that opens the user's email client with a prefilled mailto
-- **Full legal coverage**: Privacy Policy, Terms of Service, and Disclaimer
-- **No back-navigation black screen** — `whileInView` animations were intentionally avoided where they conflict with browser back/forward cache
 
 ---
 
 ## Pages
 
-| Path | Description |
-| --- | --- |
-| `/` | Home — hero, journey, how it works, built for, metrics, trust, CTA |
-| `/about` | Mission, vision, principles, who it's for |
-| `/careers` | Open roles + culture |
-| `/careers/[slug]` | Individual role detail + application modal |
-| `/contact` | Contact form + office details + embedded map |
-| `/privacy-policy` | Privacy policy |
+| Route | Content |
+|-------|---------|
+| `/` | Hero, guest journey, how it works, built-for segment switcher, metrics, trust strip, CTA |
+| `/about` | Mission, vision, operational model, principles, target segments |
+| `/careers` | Culture values, open role listings |
+| `/careers/[slug]` | Role detail, responsibilities, requirements, benefits, apply modal |
+| `/contact` | Contact form, office details, embedded Google Map |
+| `/privacy-policy` | Full privacy policy |
 | `/terms-of-service` | Terms of service |
 | `/disclaimer` | Site disclaimer |
-| `/particle-demo` | Static particle text experiment |
+
+---
+
+## UI & UX Design
+
+### Visual Language
+
+The design is built around a light-dominant theme with a fixed brand gradient — orange, pink, purple, blue — used exclusively for accent elements, animated text, and interactive states. The base palette is white with transparent section backgrounds, allowing a soft radial gradient layer to persist across the full page height and remain visible through every section as the user scrolls.
+
+All typographic accent elements (headline second lines, section gradient text, statistics) animate continuously through the brand gradient using a `background-position` sweep, giving the page a consistent sense of motion without relying on scroll triggers.
+
+The signature card treatment — a solid 2px black border with layered hard-offset shadows — gives every content block a physical, tactile presence. This treatment is applied uniformly across the home page, careers, about, and all legal pages.
+
+### Motion System
+
+The site implements a layered motion architecture with 44 distinct animation effects across seven categories:
+
+**Ambient and continuous**
+- Six radial gradient orbs float across the page using three independent CSS keyframe patterns, each with different timing (18s–28s) and scale oscillation ranges.
+- A canvas-based particle field runs in the hero section, with brand-colored dots drifting and pulsing independently via `requestAnimationFrame`.
+- An ambient grid pattern drifts behind the hero over a 28-second cycle.
+- The brand gradient sweeps continuously across all accent text at 6-second intervals.
+
+**Scroll-linked**
+- The hero image scales and translates on a `useScroll` / `useTransform` parallax track as the user scrolls past the fold.
+- A scroll progress bar built from a `useState` + scroll event listener fills across the top of the viewport.
+- A `requestAnimationFrame` loop reads scroll velocity and applies a real-time `skewY` CSS variable to the page content — the site subtly tilts while scrolling and springs back on release.
+- The "How It Works" step connector lines fill top-to-bottom as each step becomes active.
+- The navigation header transitions between transparent and frosted-glass states at 40px scroll depth.
+
+**Entrance and reveal**
+- Section content enters via scroll-triggered `whileInView` animations with staggered delays.
+- Headline text is split word-by-word, each word entering with a `y: 110%` clip and a `rotateX: 40deg` perspective transform, creating a folding-in reveal effect.
+- The session-once intro screen runs an 18-particle burst, two expanding ring pulses, a spring-based logo scale-in, and a staggered character-by-character wordmark reveal before sliding upward off the viewport.
+
+**Interactive**
+- Every card on the site is wrapped in a `TiltCard` component that reads mouse position relative to the element and applies `perspective(800px) rotateX() rotateY()` transforms in real time, with a smooth return to neutral on mouse leave.
+- The custom cursor runs two layers via `requestAnimationFrame`: a 6px gradient dot that tracks 1:1 with the pointer, and a larger conic-gradient ring that trails behind using lerp spring interpolation and rotates continuously at variable speed depending on hover state.
+- Primary CTA buttons animate their gradient background-position on hover, lift 1px on the Y axis, and pulse their box-shadow on a 3-second breathing cycle.
+- The "Built For" section tab indicator and the navigation active underline both use Framer Motion `layoutId` for spring-based position transitions.
+
+**Reduced motion**
+All decorative animations — keyframes, transitions, canvas loops, cursor effects, and tilt interactions — are fully disabled when `prefers-reduced-motion: reduce` is set. The site remains fully functional and readable without any motion.
+
+### Component Architecture
+
+**`TiltCard`** — A client-side wrapper that applies 3D perspective tilt on `mousemove` and resets on `mouseleave`. Accepts `intensity` and `className` props. Applied to every card surface across all pages.
+
+**`SplitText`** — Splits a string by word, wraps each in an `overflow: hidden` container, and animates each word in from `y: 110%` with `rotateX` on scroll entry. Accepts tag, delay, className, and style props.
+
+**`FloatingOrbs`** — Renders six absolutely-positioned radial gradient divs with independent CSS keyframe float patterns. Fixed to the viewport to serve as the persistent background layer across all pages.
+
+**`ScrollSkew`** — Null-rendering component that reads scroll velocity via event listener and writes a `--scroll-skew` CSS variable to `:root` each frame, consumed by the page wrapper.
+
+**`ParticleField`** — Canvas element with a `ResizeObserver`-aware `requestAnimationFrame` loop. Particles wrap at viewport edges, pulse their alpha on a sine wave, and use brand colors.
+
+**`ScrollProgress`** — Thin gradient bar at the top of the viewport, width driven by `scrollY / (documentHeight - viewportHeight)`.
+
+**`LegalBlock`** — Shared card component used across the three legal pages. Wraps a `TiltCard` inside a `motion.div` with scroll-triggered fade and staggered index-based delay.
+
+**`Intro`** — Session-once preloader using `sessionStorage` to prevent repeat display on navigation. Runs a multi-phase animation sequence: spark burst, ring pulses, logo spring, wordmark stagger, tagline fade, then slides the full-screen overlay upward to reveal the page.
+
+### Responsive Design
+
+The site is built mobile-first. Layouts shift at the `md` (768px) and `lg` (1024px) Tailwind breakpoints. The hero image, particle field, and tilt effects are suppressed on smaller screens. The navigation collapses to a hamburger menu with a full-screen overlay on mobile. All form inputs, modals, and card grids adapt to single-column layouts on small viewports.
+
+---
+
+## Key Features
+
+- Animated live demo transcript in the hero — a looping multilingual guest/agent conversation with per-character typing and a synchronized waveform visualizer
+- Scroll-driven "How It Works" step timeline with sticky integrations panel and dynamic connector line fill
+- Per-segment tab switcher in "Built For" with an animated phone mockup and staggered message bubble entrances
+- `requestAnimationFrame` count-up animation on all metric figures, triggered on scroll entry
+- Infinite logo marquee in the trust strip, pausing on hover
+- Dynamic career role pages generated from a static jobs catalog with slug-based routing
+- Apply modal with CV upload field, project links, and a prefilled `mailto:` submission
+- Contact form with embedded Google Map
+- Full legal page coverage — Privacy Policy, Terms of Service, Disclaimer
 
 ---
 
 ## Author
 
 **Bhaskar Shamo Ray**
-Web Developer Intern submission for Dynoz AI
-Email: bhaskarshamoray11@gmail.com
+bhaskarshamoray11@gmail.com
