@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import TiltCard from "@/components/tilt-card";
 import { MapPin, Clock, ArrowLeft, CheckCircle2, X, Upload } from "lucide-react";
 import type { Job } from "@/lib/jobs-data";
 
@@ -249,8 +250,9 @@ export default function JobPage({ job }: { job: Job }) {
                 { title: "Benefits", content: <ul className="flex flex-col gap-3">{job.benefits.map((b) => <li key={b} className="flex items-start gap-3 text-sm" style={{ color: "rgba(12,12,14,0.65)" }}><span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: "#1A56FF" }} />{b}</li>)}</ul> },
                 ...(job.stack.length > 0 ? [{ title: "Stack", content: <div className="flex flex-wrap gap-2">{job.stack.map((s) => <span key={s} className="text-xs font-mono px-3 py-1.5 rounded-md" style={{ color: "#1A56FF", border: "1px solid rgba(26,86,255,0.2)", background: "rgba(26,86,255,0.06)" }}>{s}</span>)}</div> }] : []),
               ].map(({ title, content }) => (
-                <div
+                <TiltCard
                   key={title}
+                  intensity={4}
                   className="rounded-xl p-8 flex flex-col gap-4 bg-white"
                   style={{
                     border: "2px solid #0C0C0E",
@@ -259,13 +261,14 @@ export default function JobPage({ job }: { job: Job }) {
                 >
                   <h2 className="text-lg font-bold" style={{ color: "#0C0C0E" }}>{title}</h2>
                   {content}
-                </div>
+                </TiltCard>
               ))}
             </div>
 
             {/* Sidebar */}
             <div className="lg:sticky lg:top-24 flex flex-col gap-4">
-              <div
+              <TiltCard
+                intensity={4}
                 className="rounded-xl p-7 flex flex-col gap-4 bg-white"
                 style={{
                   border: "2px solid #0C0C0E",
@@ -287,9 +290,10 @@ export default function JobPage({ job }: { job: Job }) {
                 >
                   Copy job link
                 </button>
-              </div>
+              </TiltCard>
 
-              <div
+              <TiltCard
+                intensity={4}
                 className="rounded-xl p-6 flex flex-col gap-3 bg-white"
                 style={{
                   border: "2px solid #0C0C0E",
@@ -302,7 +306,7 @@ export default function JobPage({ job }: { job: Job }) {
                   <span className="flex items-center gap-2"><Clock size={13} style={{ color: "rgba(12,12,14,0.4)" }} />{job.type}</span>
                   <span className="text-xs font-mono px-2.5 py-1 rounded-md border w-fit mt-1" style={{ color: "#1A56FF", border: "1px solid rgba(26,86,255,0.2)", background: "rgba(26,86,255,0.06)" }}>{job.exp}</span>
                 </div>
-              </div>
+              </TiltCard>
             </div>
           </div>
         </div>
