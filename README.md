@@ -1,6 +1,6 @@
 # Dynoz AI — Landing Site
 
-**Live:** [https://dynoz-ai.vercel.app](https://dynoz-ai.vercel.app)
+**Live:** [https://dynoz-ai.vercel.app]()
 
 Dynoz AI is an AI operations platform for the hospitality and travel industry, deploying multilingual voice agents that handle guest calls, route requests, and resolve service needs around the clock. This repository contains the public-facing marketing site — a full-stack Next.js application covering the product, company, careers, and legal surfaces.
 
