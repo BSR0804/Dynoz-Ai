@@ -264,6 +264,23 @@ function PhoneScreen() {
     tick();
   }
 
+  // Mouse-tilt: rotate the phone in 3D toward the cursor, like the cards.
+  const tiltRef = useRef<HTMLDivElement>(null);
+  function handleTilt(e: React.MouseEvent<HTMLDivElement>) {
+    if (reduce) return;
+    const el = tiltRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `rotateX(${-py * 12}deg) rotateY(${px * 12}deg) scale(1.03)`;
+  }
+  function resetTilt() {
+    const el = tiltRef.current;
+    if (!el) return;
+    el.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+  }
+
   return (
     <div ref={wrapRef} className="relative z-20" style={{ perspective: 1200 }}>
       {/* Glow behind phone */}
@@ -276,11 +293,21 @@ function PhoneScreen() {
       <motion.div
         animate={reduce ? {} : { y: [0, -8, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-20 w-[266px] rounded-[2.4rem] p-2.5"
+        className="relative z-20"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+      <div
+        ref={tiltRef}
+        onMouseMove={handleTilt}
+        onMouseLeave={resetTilt}
+        className="w-[266px] rounded-[2.4rem] p-2.5"
         style={{
           background: "linear-gradient(160deg, #1a1a1f, #0c0c0e)",
           boxShadow:
             "0 40px 80px rgba(12,12,14,0.28), 0 16px 32px rgba(12,12,14,0.16), inset 0 1px 1px rgba(255,255,255,0.08)",
+          transition: "transform 0.18s ease-out",
+          transformStyle: "preserve-3d",
+          willChange: "transform",
         }}
       >
         <div
@@ -384,6 +411,7 @@ function PhoneScreen() {
             </div>
           </div>
         </div>
+      </div>
       </motion.div>
     </div>
   );
