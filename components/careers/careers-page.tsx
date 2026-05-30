@@ -4,6 +4,7 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import { MapPin, Clock, ArrowRight } from "lucide-react";
+import TiltCard from "@/components/tilt-card";
 import { jobs } from "@/lib/jobs-data";
 
 const values = [
@@ -77,10 +78,10 @@ export default function CareersPage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {values.map((v, i) => (
-              <motion.div key={v.title} className="card-3d p-7 flex flex-col gap-3" {...fadeUp(i * 0.1)}>
+              <motion.div key={v.title} {...fadeUp(i * 0.1)}><TiltCard className="card-3d p-7 flex flex-col gap-3" intensity={5}>
                 <h3 className="text-base font-semibold" style={{ color: "var(--ink)" }}>{v.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>{v.desc}</p>
-              </motion.div>
+              </TiltCard></motion.div>
             ))}
           </div>
         </div>
@@ -98,11 +99,11 @@ export default function CareersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {jobs.map((job, i) => (
-              <motion.a
-                key={job.title}
+              <motion.div key={job.title} {...fadeUp(i * 0.08)}>
+              <TiltCard intensity={5}>
+              <a
                 href={`/careers/${job.slug}`}
-                className="card-3d group p-7 flex flex-col gap-5 transition-all duration-200 hover:-translate-y-1"
-                {...fadeUp(i * 0.08)}
+                className="card-3d group p-7 flex flex-col gap-5 block"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-mono tracking-widest" style={{ color: "var(--text-muted)" }}>
@@ -132,7 +133,7 @@ export default function CareersPage() {
                     <ArrowRight size={14} style={{ color: "var(--accent)" }} />
                   </div>
                 </div>
-              </motion.a>
+              </a></TiltCard></motion.div>
             ))}
           </div>
         </div>

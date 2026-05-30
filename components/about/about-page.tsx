@@ -4,6 +4,7 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import TiltCard from "@/components/tilt-card";
 
 const principles = [
   { title: "Trust",       desc: "Enterprise-grade reliability and transparency, built into every layer of our platform." },
@@ -80,11 +81,11 @@ export default function AboutPage() {
               { tag: "OUR MISSION", title: "Transform how the industry serves guests through AI.", body: "We are building the AI operations layer that handles guest operations across the full guest journey — from reservation to post-checkout — through multilingual AI voice agents, so hospitality teams can focus on what humans do best." },
               { tag: "OUR VISION",  title: "Seamless service as the standard across every property.", body: "A world where seamless service is the standard across every property, platform, and travel brand — where every guest feels attended to, no matter the language, the hour, or the channel." },
             ].map((item, i) => (
-              <motion.div key={item.tag} className="card-3d p-8 flex flex-col gap-4" {...fadeUp(i * 0.1)}>
+              <motion.div key={item.tag} {...fadeUp(i * 0.1)}><TiltCard className="card-3d p-8 flex flex-col gap-4" intensity={5}>
                 <p className="text-[11px] font-mono tracking-[0.15em]" style={{ color: "var(--accent)" }}>{item.tag}</p>
                 <h3 className="text-xl font-bold leading-snug" style={{ color: "var(--ink)" }}>{item.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>{item.body}</p>
-              </motion.div>
+              </TiltCard></motion.div>
             ))}
           </div>
         </div>
@@ -102,21 +103,21 @@ export default function AboutPage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {journey.map((item, i) => (
-              <motion.div key={item.phase} className="card-3d p-6 flex flex-col gap-4" {...fadeUp(i * 0.1)}>
+              <motion.div key={item.phase} {...fadeUp(i * 0.1)}><TiltCard className="card-3d p-6 flex flex-col gap-4" intensity={5}>
                 <span className="text-[11px] font-mono px-2.5 py-1 rounded-md self-start gradient-border"
                   style={{ color: "var(--text-strong)" }}>
                   {item.phase}
                 </span>
                 <h3 className="font-semibold text-base" style={{ color: "var(--ink)" }}>{item.headline}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>{item.body}</p>
-              </motion.div>
+              </TiltCard></motion.div>
             ))}
           </div>
-          <motion.div className="card-3d p-5" {...fadeUp(0.3)}>
+          <motion.div {...fadeUp(0.3)}><TiltCard className="card-3d p-5" intensity={3}>
             <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>
               By integrating deeply with hotel systems, Dynoz enables faster request handling, 24/7 multilingual guest support, and more personalised experiences through access to guest history and preferences — while reducing repetitive operational load so hotel teams can focus on human interactions.
             </p>
-          </motion.div>
+          </TiltCard></motion.div>
         </div>
       </section>
 
@@ -132,10 +133,10 @@ export default function AboutPage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {principles.map((p, i) => (
-              <motion.div key={p.title} className="card-3d p-7 flex flex-col gap-3" {...fadeUp(i * 0.1)}>
+              <motion.div key={p.title} {...fadeUp(i * 0.1)}><TiltCard className="card-3d p-7 flex flex-col gap-3" intensity={5}>
                 <h3 className="text-base font-semibold" style={{ color: "var(--ink)" }}>{p.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>{p.desc}</p>
-              </motion.div>
+              </TiltCard></motion.div>
             ))}
           </div>
         </div>
@@ -153,10 +154,10 @@ export default function AboutPage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {segments.map((seg, i) => (
-              <motion.div key={seg.label} className="card-3d p-7 flex flex-col gap-3" {...fadeUp(i * 0.1)}>
+              <motion.div key={seg.label} {...fadeUp(i * 0.1)}><TiltCard className="card-3d p-7 flex flex-col gap-3" intensity={5}>
                 <h3 className="text-base font-semibold" style={{ color: "var(--ink)" }}>{seg.label}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>{seg.desc}</p>
-              </motion.div>
+              </TiltCard></motion.div>
             ))}
           </div>
         </div>
