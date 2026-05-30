@@ -201,35 +201,32 @@ export default function JobPage({ job }: { job: Job }) {
       {/* Hero */}
       <section
         className="relative pt-16 overflow-hidden"
-        style={{ background: "#0C0C0E" }}
+        style={{ background: "transparent" }}
       >
-        <div aria-hidden className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] opacity-[0.08]"
-          style={{ background: "radial-gradient(circle at top right, #1A56FF, transparent 65%)" }}
-        />
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-16">
           <div className="flex flex-col gap-6">
             <a
               href="/careers"
-              className="flex items-center gap-2 text-sm w-fit transition-colors duration-200 hover:text-white"
-              style={{ color: "rgba(255,255,255,0.4)" }}
+              className="flex items-center gap-2 text-sm w-fit transition-colors duration-200"
+              style={{ color: "var(--text-muted)" }}
             >
               <ArrowLeft size={14} /> Back to Careers
             </a>
 
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-mono tracking-widest px-2.5 py-1 rounded-md" style={{ color: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,0.12)" }}>
+              <span className="text-xs font-mono tracking-widest px-2.5 py-1 rounded-md" style={{ color: "var(--text-muted)", border: "1px solid var(--border)" }}>
                 {job.dept.toUpperCase()}
               </span>
-              <span className="text-xs font-mono px-2.5 py-1 rounded-md" style={{ color: "#1A56FF", background: "rgba(26,86,255,0.1)", border: "1px solid rgba(26,86,255,0.2)" }}>
+              <span className="text-xs font-mono px-2.5 py-1 rounded-md" style={{ color: "#1A56FF", background: "rgba(26,86,255,0.08)", border: "1px solid rgba(26,86,255,0.2)" }}>
                 {job.exp}
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-[-0.025em]">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-[-0.025em]" style={{ color: "var(--ink)" }}>
               {job.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-5 text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <div className="flex flex-wrap items-center gap-5 text-sm" style={{ color: "var(--text-muted)" }}>
               <span className="flex items-center gap-1.5"><MapPin size={13} /> {job.location}</span>
               <span className="flex items-center gap-1.5"><Clock size={13} /> {job.type}</span>
             </div>
@@ -238,7 +235,7 @@ export default function JobPage({ job }: { job: Job }) {
       </section>
 
       {/* Body */}
-      <section className="py-16" style={{ background: "#FAFAF8", borderTop: "1px solid rgba(12,12,14,0.06)" }}>
+      <section className="py-16" style={{ background: "transparent", borderTop: "1px solid var(--hairline)" }}>
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 

@@ -73,17 +73,17 @@ export default function BuiltFor() {
   const Icon = current.icon;
 
   return (
-    <section id="built-for" className="py-24 md:py-32" style={{ background: "#FAFAF8", borderTop: "1px solid rgba(12,12,14,0.06)" }}>
+    <section id="built-for" className="py-24 md:py-32" style={{ background: "var(--paper)", borderTop: "1px solid var(--hairline)" }}>
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}
         <div className="mb-12 max-w-xl">
-          <p className="text-xs font-mono tracking-[0.16em] mb-3" style={{ color: "rgba(12,12,14,0.7)" }}>
+          <p className="text-xs font-mono tracking-[0.16em] mb-3" style={{ color: "var(--text-muted)" }}>
             BUILT FOR
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight tracking-[-0.02em]" style={{ color: "#0C0C0E" }}>
+          <h2 className="text-3xl md:text-4xl font-bold leading-tight tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
             Designed for hospitality{" "}
-            <span style={{ color: "rgba(12,12,14,0.38)" }}>&amp; travel.</span>
+            <span className="gradient-text">&amp; travel.</span>
           </h2>
         </div>
 
@@ -96,15 +96,23 @@ export default function BuiltFor() {
               <button
                 key={seg.id}
                 onClick={() => setActive(seg.id)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150"
+                className="relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                 style={{
-                  color: isActive ? "#1A56FF" : "rgba(12,12,14,0.55)",
-                  background: isActive ? "rgba(26,86,255,0.07)" : "rgba(12,12,14,0.04)",
-                  border: `1px solid ${isActive ? "rgba(26,86,255,0.2)" : "rgba(12,12,14,0.08)"}`,
+                  color: isActive ? "#0C0C0E" : "var(--text-muted)",
+                  background: isActive ? "var(--surface-card)" : "rgba(12,12,14,0.04)",
+                  border: `1px solid ${isActive ? "transparent" : "var(--border)"}`,
+                  boxShadow: isActive ? "0 4px 14px rgba(12,12,14,0.08)" : "none",
                 }}
               >
-                <SIcon size={13} />
-                {seg.label}
+                {isActive && (
+                  <motion.span
+                    layoutId="builtForTab"
+                    className="absolute inset-0 rounded-lg gradient-border"
+                    transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                  />
+                )}
+                <SIcon size={13} className="relative z-10" />
+                <span className="relative z-10">{seg.label}</span>
               </button>
             );
           })}
@@ -114,63 +122,70 @@ export default function BuiltFor() {
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center rounded-xl p-8 md:p-12"
-            style={{
-              background: "#FFFFFF",
-              border: "2px solid #0C0C0E",
-              boxShadow: "4px 4px 0px #0C0C0E, 8px 8px 0px rgba(12,12,14,0.35), 14px 14px 0px rgba(12,12,14,0.12)",
-            }}
+            initial={{ opacity: 0, y: 14, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.985 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center rounded-xl p-8 md:p-12 card-3d"
           >
             {/* Left */}
             <div className="flex flex-col gap-5">
-              <h3 className="text-xl md:text-2xl font-semibold leading-snug tracking-[-0.015em]" style={{ color: "#0C0C0E" }}>
+              <h3 className="text-xl md:text-2xl font-semibold leading-snug tracking-[-0.015em]" style={{ color: "var(--ink)" }}>
                 {current.headline}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(12,12,14,0.75)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>
                 {current.body}
               </p>
               <ul className="flex flex-col gap-2.5 mt-1">
-                {current.outcomes.map((o) => (
-                  <li key={o} className="flex items-start gap-2.5 text-sm" style={{ color: "rgba(12,12,14,0.82)" }}>
-                    <svg className="flex-shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <circle cx="7" cy="7" r="6" fill="#1A56FF" opacity="0.1" />
-                      <path d="M4.5 7l1.8 1.8L9.5 5.2" stroke="#1A56FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                {current.outcomes.map((o, oi) => (
+                  <motion.li
+                    key={o}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 + oi * 0.07, duration: 0.4 }}
+                    className="flex items-start gap-2.5 text-sm"
+                    style={{ color: "var(--text-strong)" }}
+                  >
+                    <span
+                      className="flex-shrink-0 mt-0.5 w-3.5 h-3.5 rounded-full flex items-center justify-center gradient-bg"
+                    >
+                      <svg width="8" height="8" viewBox="0 0 14 14" fill="none">
+                        <path d="M3.5 7l2.3 2.3L10.5 4.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
                     {o}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </div>
 
-            {/* Right — phone mockup */}
+            {/* Right — phone mockup (kept dark by design — looks like a real phone screen) */}
             <div className="flex justify-center md:justify-end">
-              <div
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="w-60 rounded-[1.75rem] overflow-hidden flex flex-col"
                 style={{
                   background: "#0C0C0E",
-                  border: "2px solid rgba(255,255,255,0.12)",
-                  boxShadow: "4px 4px 0px rgba(255,255,255,0.22), 8px 8px 0px rgba(255,255,255,0.14), 14px 14px 0px rgba(255,255,255,0.07), 20px 20px 40px rgba(0,0,0,0.5)",
+                  border: "2px solid rgba(12,12,14,0.7)",
+                  boxShadow: "0 30px 60px rgba(12,12,14,0.18), 0 12px 24px rgba(12,12,14,0.1), 0 2px 4px rgba(12,12,14,0.08)",
                 }}
               >
                 {/* Notch */}
                 <div className="flex justify-center pt-3 pb-1">
-                  <div className="w-16 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }} />
+                  <div className="w-16 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.18)" }} />
                 </div>
 
                 {/* Chat header */}
                 <div className="px-4 py-2.5 flex items-center gap-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "rgba(26,86,255,0.15)" }}>
-                    <Icon size={11} style={{ color: "#1A56FF" }} />
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center gradient-bg">
+                    <Icon size={11} className="text-white" />
                   </div>
                   <div>
                     <p className="text-white text-[11px] font-semibold">Dynoz AI</p>
-                    <p className="text-[9px]" style={{ color: "rgba(255,255,255,0.3)" }}>Always available</p>
+                    <p className="text-[9px]" style={{ color: "rgba(255,255,255,0.4)" }}>Always available</p>
                   </div>
-                  <div className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <div className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot" />
                 </div>
 
                 {/* Messages */}
@@ -178,24 +193,32 @@ export default function BuiltFor() {
                   {current.conversation.map((msg, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.1 }}
+                      initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ delay: 0.4 + i * 0.35, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className={`flex ${msg.speaker === "Guest" ? "justify-start" : "justify-end"}`}
                     >
                       <div
                         className="max-w-[88%] px-3 py-2 rounded-xl text-[10px] leading-relaxed"
-                        style={{
-                          background: msg.speaker === "Dynoz" ? "rgba(26,86,255,0.18)" : "rgba(255,255,255,0.06)",
-                          color: msg.speaker === "Dynoz" ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.45)",
-                        }}
+                        style={
+                          msg.speaker === "Dynoz"
+                            ? {
+                                background: "linear-gradient(135deg, rgba(255,122,61,0.25), rgba(233,75,138,0.25), rgba(181,71,214,0.25), rgba(91,124,255,0.25))",
+                                color: "rgba(255,255,255,0.95)",
+                                border: "1px solid rgba(255,255,255,0.08)",
+                              }
+                            : {
+                                background: "rgba(255,255,255,0.08)",
+                                color: "rgba(255,255,255,0.55)",
+                              }
+                        }
                       >
                         {msg.text}
                       </div>
                     </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </AnimatePresence>

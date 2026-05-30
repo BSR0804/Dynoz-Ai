@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Cursor from "@/components/cursor";
+import Intro  from "@/components/intro";
+import ScrollProgress from "@/components/scroll-progress";
+import FloatingOrbs from "@/components/floating-orbs";
+import ScrollSkew from "@/components/scroll-skew";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,7 +55,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ScrollProgress />
+        <FloatingOrbs />
+        <ScrollSkew />
+        <Intro />
+        <Cursor />
+        <div className="relative" style={{ zIndex: 1, skewY: "var(--scroll-skew, 0deg)" } as any}>{children}</div>
+      </body>
     </html>
   );
 }

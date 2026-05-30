@@ -2,216 +2,168 @@
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
-import { MapPin, Clock, ArrowRight, Zap, Code2, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import { MapPin, Clock, ArrowRight } from "lucide-react";
 import { jobs } from "@/lib/jobs-data";
 
 const values = [
-  {
-    icon: Zap,
-    title: "Ownership by Design",
-    desc: "Work on core systems with real responsibility and visible impact.",
-  },
-  {
-    icon: Code2,
-    title: "Engineering First",
-    desc: "We prioritise reliability and long-term maintainability over shortcuts.",
-  },
-  {
-    icon: Users,
-    title: "Flexible by Default",
-    desc: "We trust people to manage their time and work where they're most effective.",
-  },
+  { title: "Ownership by Design", desc: "Work on core systems with real responsibility and visible impact." },
+  { title: "Engineering First",   desc: "We prioritise reliability and long-term maintainability over shortcuts." },
+  { title: "Flexible by Default", desc: "We trust people to manage their time and work where they're most effective." },
 ];
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 22 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] },
+});
 
 export default function CareersPage() {
   return (
     <>
       <Nav />
 
-      {/* Hero */}
-      <section
-        className="relative min-h-[52vh] flex flex-col justify-center overflow-hidden pt-16"
-        style={{ background: "#0C0C0E" }}
-      >
-        <div aria-hidden className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] opacity-[0.1]"
-          style={{ background: "radial-gradient(circle at top right, #1A56FF, transparent 65%)" }}
-        />
+      {/* ── Hero ── */}
+      <section className="relative min-h-[56vh] flex flex-col justify-center overflow-hidden pt-16" style={{ background: "var(--paper)" }}>
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute blob-a -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-[0.18]"
+            style={{ background: "radial-gradient(circle, #E94B8A 0%, transparent 60%)", filter: "blur(80px)" }} />
+          <div className="absolute blob-b top-0 right-[-120px] w-[560px] h-[560px] rounded-full opacity-[0.16]"
+            style={{ background: "radial-gradient(circle, #5B7CFF 0%, transparent 60%)", filter: "blur(90px)" }} />
+          <div className="absolute inset-0 grid-drift opacity-50" />
+        </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24">
-          <div className="flex flex-col gap-5 max-w-2xl">
-            <p className="text-xs font-mono tracking-[0.16em]" style={{ color: "rgba(255,255,255,0.3)" }}>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-28">
+          <motion.div className="flex flex-col gap-5 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
+            <span className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.14em] uppercase px-3 py-1.5 rounded-md self-start"
+              style={{ color: "var(--text-muted)", background: "rgba(12,12,14,0.04)", border: "1px solid var(--border)" }}>
               CAREERS AT DYNOZ
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-tight tracking-[-0.025em]">
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-tight tracking-[-0.028em]" style={{ color: "var(--ink)" }}>
               Build the future of{" "}
-              <span style={{ color: "rgba(255,255,255,0.35)" }}>hospitality &amp; travel.</span>
+              <span className="gradient-text">hospitality &amp; travel.</span>
             </h1>
-            <p className="text-base md:text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.42)" }}>
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: "var(--text)" }}>
               We're a growing team reinventing hospitality and travel through AI-powered agents that deliver instant, consistent, and delightful customer experiences.
             </p>
-            <div className="flex items-center gap-4 pt-2">
-              <a
-                href="#openings"
-                className="flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold text-sm transition-all duration-200 hover:opacity-90"
-                style={{ background: "#1A56FF" }}
-              >
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <a href="#openings"
+                className="btn-grad flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold text-sm">
                 View Open Roles <ArrowRight size={14} />
               </a>
-              <a
-                href="mailto:careers@dynoz.ai"
-                className="text-sm font-medium transition-colors duration-200"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-              >
+              <a href="mailto:careers@dynoz.ai"
+                className="text-sm font-medium transition-colors duration-200 hover:text-[#1A56FF]"
+                style={{ color: "var(--text-muted)" }}>
                 Join the Talent Network
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Life at Dynoz */}
-      <section className="py-24" style={{ background: "#FAFAF8", borderTop: "1px solid rgba(12,12,14,0.06)" }}>
+      {/* ── Life at Dynoz ── */}
+      <section className="py-24" style={{ background: "var(--paper-2)" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-12">
-            <p className="text-xs font-mono tracking-[0.16em] mb-3" style={{ color: "rgba(12,12,14,0.5)" }}>
-              LIFE AT DYNOZ
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em]" style={{ color: "#0C0C0E" }}>
+          <motion.div className="mb-12" {...fadeUp()}>
+            <p className="text-xs font-mono tracking-[0.16em] mb-3" style={{ color: "var(--text-muted)" }}>LIFE AT DYNOZ</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
               A culture built around{" "}
-              <span style={{ color: "rgba(12,12,14,0.4)" }}>ownership &amp; impact.</span>
+              <span className="gradient-text">ownership &amp; impact.</span>
             </h2>
-          </div>
-
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((v) => {
-              const Icon = v.icon;
-              return (
-                <div
-                  key={v.title}
-                  className="rounded-xl p-7 flex flex-col gap-4"
-                  style={{
-                    background: "#fff",
-                    border: "2px solid #0C0C0E",
-                    boxShadow: "4px 4px 0px #0C0C0E, 8px 8px 0px rgba(12,12,14,0.2)",
-                  }}
-                >
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-base font-semibold" style={{ color: "#0C0C0E" }}>{v.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(12,12,14,0.6)" }}>{v.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
+            {values.map((v, i) => (
+              <motion.div key={v.title} className="card-3d p-7 flex flex-col gap-3" {...fadeUp(i * 0.1)}>
+                <h3 className="text-base font-semibold" style={{ color: "var(--ink)" }}>{v.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text)" }}>{v.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Open Roles */}
-      <section id="openings" className="py-24" style={{ background: "#0C0C0E", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      {/* ── Open Roles ── */}
+      <section id="openings" className="py-24" style={{ background: "var(--paper)" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-12">
-            <p className="text-xs font-mono tracking-[0.16em] mb-3" style={{ color: "rgba(255,255,255,0.28)" }}>
-              OPEN ROLES
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-[-0.02em]">
-              Current openings
+          <motion.div className="mb-12" {...fadeUp()}>
+            <p className="text-xs font-mono tracking-[0.16em] mb-3" style={{ color: "var(--text-muted)" }}>OPEN ROLES</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
+              Current <span className="gradient-text">openings</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div
-            className="rounded-2xl p-6 md:p-8"
-            style={{
-              background: "#fff",
-              border: "2px solid #0C0C0E",
-              boxShadow: "4px 4px 0px #0C0C0E, 8px 8px 0px rgba(12,12,14,0.35), 14px 14px 0px rgba(12,12,14,0.12)",
-            }}
-          >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {jobs.map((job) => (
-              <a
+            {jobs.map((job, i) => (
+              <motion.a
                 key={job.title}
                 href={`/careers/${job.slug}`}
-                className="group rounded-xl p-7 flex flex-col gap-5 transition-all duration-200"
-                style={{
-                  background: "#ffffff",
-                  border: "2px solid #0C0C0E",
-                  boxShadow: "4px 4px 0px #0C0C0E, 8px 8px 0px rgba(12,12,14,0.35), 14px 14px 0px rgba(12,12,14,0.12)",
-                }}
+                className="card-3d group p-7 flex flex-col gap-5 transition-all duration-200 hover:-translate-y-1"
+                {...fadeUp(i * 0.08)}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-mono tracking-widest" style={{ color: "rgba(12,12,14,0.65)" }}>
+                  <span className="text-[11px] font-mono tracking-widest" style={{ color: "var(--text-muted)" }}>
                     {job.dept.toUpperCase()}
                   </span>
-                  <span
-                    className="text-[10px] font-mono px-2.5 py-1 rounded-md"
-                    style={{
-                      color: "#1A56FF",
-                      background: "rgba(26,86,255,0.1)",
-                      border: "1px solid rgba(26,86,255,0.2)",
-                    }}
-                  >
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded-md gradient-border"
+                    style={{ color: "var(--text-strong)" }}>
                     {job.exp}
                   </span>
                 </div>
 
-                <h3 className="text-base font-semibold leading-snug" style={{ color: "#0C0C0E" }}>
+                <h3 className="text-base font-semibold leading-snug" style={{ color: "var(--ink)" }}>
                   {job.title}
                 </h3>
 
-                <div className="flex items-center justify-between mt-auto pt-4" style={{ borderTop: "1px solid rgba(12,12,14,0.08)" }}>
+                <div className="flex items-center justify-between mt-auto pt-4" style={{ borderTop: "1px solid var(--hairline)" }}>
                   <div className="flex flex-wrap gap-4">
-                    <span className="flex items-center gap-1.5 text-xs" style={{ color: "rgba(12,12,14,0.65)" }}>
+                    <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-muted)" }}>
                       <MapPin size={11} />{job.location}
                     </span>
-                    <span className="flex items-center gap-1.5 text-xs" style={{ color: "rgba(12,12,14,0.65)" }}>
+                    <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-muted)" }}>
                       <Clock size={11} />{job.type}
                     </span>
                   </div>
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-110"
-                    style={{ background: "rgba(26,86,255,0.12)" }}
-                  >
-                    <ArrowRight size={14} style={{ color: "#1A56FF" }} />
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-110"
+                    style={{ background: "var(--accent-dim)" }}>
+                    <ArrowRight size={14} style={{ color: "var(--accent)" }} />
                   </div>
                 </div>
-              </a>
+              </motion.a>
             ))}
-          </div>
           </div>
         </div>
       </section>
 
-      {/* No fit CTA */}
-      <section className="py-20" style={{ background: "#FAFAF8", borderTop: "1px solid rgba(12,12,14,0.06)" }}>
+      {/* ── CTA ── */}
+      <section className="py-20" style={{ background: "var(--paper-2)" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div
-            className="relative rounded-2xl overflow-hidden px-10 md:px-20 py-16 flex flex-col items-start gap-6"
-            style={{
-              background: "#0C0C0E",
-              border: "2px solid #0C0C0E",
-              boxShadow: "4px 4px 0px #0C0C0E, 8px 8px 0px rgba(12,12,14,0.35), 14px 14px 0px rgba(12,12,14,0.12)",
-            }}
+          <motion.div
+            className="relative rounded-2xl overflow-hidden px-10 md:px-20 py-16 flex flex-col items-start gap-6 card-3d"
+            {...fadeUp()}
           >
-            <div aria-hidden className="absolute top-0 left-0 w-[400px] h-[400px] pointer-events-none"
-              style={{ background: "radial-gradient(circle at top left, rgba(26,86,255,0.18), transparent 65%)" }}
-            />
+            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute blob-b -top-32 -left-32 w-[500px] h-[500px] rounded-full opacity-[0.12]"
+                style={{ background: "radial-gradient(circle, #E94B8A 0%, transparent 60%)", filter: "blur(70px)" }} />
+              <div className="absolute blob-a top-0 right-0 w-[400px] h-[400px] rounded-full opacity-[0.10]"
+                style={{ background: "radial-gradient(circle, #5B7CFF 0%, transparent 60%)", filter: "blur(70px)" }} />
+            </div>
             <div className="relative z-10 flex flex-col gap-4 max-w-xl">
-              <p className="text-xs font-mono tracking-[0.16em]" style={{ color: "rgba(255,255,255,0.3)" }}>DON'T SEE A FIT?</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight tracking-[-0.02em]">
-                We're always looking for exceptional people.
+              <p className="text-xs font-mono tracking-[0.16em]" style={{ color: "var(--text-muted)" }}>DON'T SEE A FIT?</p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
+                We're always looking for <span className="gradient-text">exceptional people.</span>
               </h2>
-              <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
+              <p className="text-base leading-relaxed" style={{ color: "var(--text)" }}>
                 Send us your resume and tell us what you'd build at Dynoz.
               </p>
             </div>
-            <a
-              href="mailto:careers@dynoz.ai?subject=Open Application — Dynoz AI"
-              className="relative z-10 flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold text-sm transition-all duration-200 hover:opacity-90"
-              style={{ background: "#1A56FF" }}
-            >
+            <a href="mailto:careers@dynoz.ai?subject=Open Application — Dynoz AI"
+              className="relative z-10 btn-grad flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold text-sm">
               Send an open application <ArrowRight size={14} />
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 

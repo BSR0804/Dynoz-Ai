@@ -81,9 +81,10 @@ export default function Nav() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled || pathname !== "/" ? "rgba(12,12,14,0.95)" : "transparent",
-          backdropFilter: scrolled || pathname !== "/" ? "blur(16px) saturate(180%)" : "none",
-          borderBottom: "1px solid rgba(255,255,255,0.12)",
+          background: scrolled || pathname !== "/" ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.55)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          borderBottom: "1px solid rgba(12,12,14,0.08)",
         }}
       >
         <div className="max-w-6xl mx-auto px-6 h-18 py-3 flex items-center justify-between">
@@ -91,7 +92,7 @@ export default function Nav() {
           {/* Logo — show only the D icon (approx left 20% of image) with color, then white text */}
           <a href="/" className="flex items-center gap-2">
             <img src="/dynoz-d.png" alt="Dynoz AI" className="h-9 w-9" />
-            <span className="text-white font-semibold text-[19px] tracking-tight">Dynoz AI</span>
+            <span className="font-semibold text-[19px] tracking-tight" style={{ color: "var(--ink)" }}>Dynoz AI</span>
           </a>
 
           {/* Desktop links */}
@@ -108,13 +109,15 @@ export default function Nav() {
                   href={link.href}
                   onClick={(e) => handleClick(e, link.href, link.anchor)}
                   className="relative flex flex-col items-center text-[15px] font-medium transition-colors duration-150 pb-0.5"
-                  style={{ color: isActive ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)" }}
+                  style={{ color: isActive ? "var(--ink)" : "var(--text-muted)" }}
                 >
                   {link.label}
                   {isActive && (
-                    <span
-                      className="absolute -bottom-0.5 left-0 right-0 h-px rounded-full"
-                      style={{ background: "#1A56FF" }}
+                    <motion.span
+                      layoutId="navUnderline"
+                      className="absolute -bottom-0.5 left-0 right-0 h-[2px] rounded-full"
+                      style={{ background: "var(--brand-grad)" }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                 </a>
@@ -126,8 +129,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-3">
             <a
               href="/contact"
-              className="px-5 py-2 rounded-lg text-white text-[15px] font-semibold transition-all duration-150 hover:opacity-90"
-              style={{ background: "#1A56FF" }}
+              className="btn-grad px-5 py-2 rounded-lg text-white text-[15px] font-semibold"
             >
               Request a Demo
             </a>
@@ -136,7 +138,7 @@ export default function Nav() {
           {/* Mobile hamburger */}
           <button
             className="md:hidden transition-colors duration-150"
-            style={{ color: "rgba(255,255,255,0.6)" }}
+            style={{ color: "var(--text)" }}
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -154,7 +156,7 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-7 md:hidden"
-            style={{ background: "#0C0C0E" }}
+            style={{ background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)" }}
           >
             {links.map((link, i) => (
               <motion.button
@@ -163,7 +165,7 @@ export default function Nav() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.3 }}
                 className="text-2xl font-semibold transition-colors"
-                style={{ color: "rgba(255,255,255,0.75)" }}
+                style={{ color: "var(--ink)" }}
                 onClick={() => handleMobileClick(link.href, link.anchor)}
               >
                 {link.label}

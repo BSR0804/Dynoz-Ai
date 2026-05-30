@@ -95,12 +95,17 @@ export default function Transcript({
           className="flex items-center gap-2"
         >
           <span
-            className="text-xs font-mono px-2.5 py-1 rounded-full border border-white/10 text-white/50"
-            style={{ letterSpacing: "0.08em" }}
+            className="text-xs font-mono px-2.5 py-1 rounded-full"
+            style={{
+              letterSpacing: "0.08em",
+              color: "var(--text-muted)",
+              border: "1px solid var(--border)",
+              background: "rgba(12,12,14,0.03)",
+            }}
           >
             {currentPhase.toUpperCase()}
           </span>
-          <div className="h-px flex-1 bg-white/10" />
+          <div className="h-px flex-1" style={{ background: "var(--hairline)" }} />
         </motion.div>
       </AnimatePresence>
 
@@ -124,13 +129,13 @@ export default function Transcript({
                 style={{
                   borderColor:
                     line.speaker === "Dynoz"
-                      ? "rgba(185,71,214,0.4)"
-                      : "rgba(255,255,255,0.12)",
+                      ? "rgba(181,71,214,0.35)"
+                      : "var(--border)",
                   color:
-                    line.speaker === "Dynoz" ? "#B547D6" : "rgba(255,255,255,0.4)",
+                    line.speaker === "Dynoz" ? "#B547D6" : "var(--text-muted)",
                   background:
                     line.speaker === "Dynoz"
-                      ? "rgba(185,71,214,0.08)"
+                      ? "rgba(181,71,214,0.08)"
                       : "transparent",
                 }}
               >
@@ -145,7 +150,7 @@ export default function Transcript({
                     color:
                       line.speaker === "Dynoz"
                         ? "#B547D6"
-                        : "rgba(255,255,255,0.35)",
+                        : "var(--text-faint)",
                   }}
                 >
                   {line.speaker === "Dynoz" ? "DYNOZ" : "GUEST"}
@@ -155,13 +160,13 @@ export default function Transcript({
                   style={{
                     color:
                       line.speaker === "Dynoz"
-                        ? "rgba(255,255,255,0.9)"
-                        : "rgba(255,255,255,0.6)",
+                        ? "var(--text-strong)"
+                        : "var(--text)",
                   }}
                 >
                   {line.displayText}
                   {!line.done && (
-                    <span className="inline-block w-0.5 h-3.5 bg-white/60 ml-0.5 align-middle animate-pulse" />
+                    <span className="inline-block w-0.5 h-3.5 ml-0.5 align-middle animate-pulse" style={{ background: "var(--text)" }} />
                   )}
                 </span>
               </div>

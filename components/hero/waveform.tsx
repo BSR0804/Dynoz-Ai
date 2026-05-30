@@ -42,8 +42,8 @@ export default function Waveform({ active }: { active: boolean }) {
           style={{
             width: "3px",
             background: active
-              ? `hsl(${200 + i * 3}, 80%, ${50 + (h / 48) * 30}%)`
-              : "rgba(255,255,255,0.15)",
+              ? `hsl(${280 + i * 3}, 75%, ${45 + (h / 48) * 20}%)`
+              : "rgba(12,12,14,0.18)",
           }}
         />
       ))}
